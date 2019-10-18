@@ -1,67 +1,145 @@
+$(document).ready(function(){
 
+var wins=0;
+var losses=0;
+var userTotal=0;
 
-
-var targetNumber = [45,49,50,35];
-var randoNum = targetNumber[Math.floor(Math.random()*targetNumber.length)];
-
+//creates a random goal number
+var randoNum = Math.floor(Math.random()*105+9);
 $(".goal").text(randoNum);
 
-var resetGoal = function (){
+//wins and losses text
+ $(".wins").text(wins);
+ $(".losses").text(losses);
 
-    $(".goal").append(randoNum);
-};
+ //crystal value
+var value1= Math.floor(Math.random()*10+5);
+var value2= Math.floor(Math.random()*10+5);
+var value3= Math.floor(Math.random()*10+5);
+var value4= Math.floor(Math.random()*10+5);
 
-var counter= 0;
-var resetCounter = function(){
-    counter = 0;
-    $(".total-score").append(counter);
+//resets everything
+ function reset(){
+     //resets goal
+     randoNum=[Math.floor(Math.random()*105+9)];
+    $(".goal").text(randoNum);
+
+    // resets total score
+    userTotal=0;
+    $(".total-score").text(userTotal);
    
-    
-}
+    //resets crystal values
+      value1= Math.floor(Math.random()*10+5);
+      value2= Math.floor(Math.random()*10+5);
+      value3= Math.floor(Math.random()*10+5);
+      value4= Math.floor(Math.random()*10+5);
+      redCrystal.attr("data-crystalvalue", value1);
+      greenCrystal.attr("data-crystalvalue", value2);
+      purpleCrystal.attr("data-crystalvalue", value3);
+      blueCrystal.attr("data-crystalvalue", value4);
+ };
 
-//values for each crystal when clicked
 
-var numOptions= [5,9,10,1];
 
-//create a loop for each each crystal so that when one is clicked all available to be clicked
+var redCrystal = $("<img>");
+redCrystal.addClass("red");
+redCrystal.attr("src", "assets/images/red stone.jpg");
+redCrystal.attr("data-crystalvalue", value1);
+$(".crystals").append(redCrystal);
 
-for (let i = 0; i < numOptions.length; i++) {
+var greenCrystal = $("<img>");
+greenCrystal.addClass("green");
+greenCrystal.attr("src", "assets/images/green stone.jpeg");
+greenCrystal.attr("data-crystalvalue", value2);
+$(".crystals").append(greenCrystal);
 
-    //Still need to figure how to randomize the score of each gem
-    // var newNum = numOptions[Math.floor(Math.random()*numOptions.length)];
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    //create an <img> for each crystal
-    var imgCrystal = $("<img>");
-   //adds class for each <img>
-    imgCrystal.addClass("Crystal-image");
+var purpleCrystal = $("<img>");
+purpleCrystal.addClass("purple");
+purpleCrystal.attr("src", "assets/images/purple stone.jpeg");
+purpleCrystal.attr("data-crystalvalue", value3);
+$(".crystals").append(purpleCrystal);
 
-    imgCrystal.attr("src", "https://img4.goodfon.com/wallpaper/nbig/c/61/infinity-war-infinity-stone-infinity-gem-marvel-space-stone.jpg");
+var blueCrystal = $("<img>");
+blueCrystal.addClass("blue");
+blueCrystal.attr("src", "assets/images/infinity-war-infinity-stone-infinity-gem-marvel-space-stone.jpg");
+blueCrystal.attr("data-crystalvalue", value4);
+$(".crystals").append(blueCrystal);
+;
 
-    imgCrystal.attr("data-crystalvalue", numOptions[i]);
-
-    $(".crystals").append(imgCrystal);
-    
-
-}
-$(".Crystal-image").on("click" , function(){
-
+$(".red").on("click", function(){
     var crystalValue = ($(this).attr("data-crystalvalue"));
-
     crystalValue = parseInt(crystalValue);
-       
-    counter += crystalValue;
+    userTotal += crystalValue;
+    $(".total-score").text(userTotal);
+    console.log("red " + crystalValue);
+    if (userTotal > randoNum) {
+        losses++;
+        $(".losses").text(losses);
+        console.log("you lost");
+        reset();
+    }
+    if (userTotal == randoNum) {
+        wins++;
+        $(".wins").text(wins);
+        reset();
+    }
+});
 
-    alert("Your score: " + counter );
-    $(".total-score").append(counter);
+$(".green").on("click", function(){
+    var crystalValue = ($(this).attr("data-crystalvalue"));
+    crystalValue = parseInt(crystalValue);
+    userTotal += crystalValue;
+    $(".total-score").text(userTotal);
+    console.log("green " + crystalValue);
+    if (userTotal > randoNum) {
+        losses++;
+        $(".losses").text(losses);
+        console.log("you lost");
+        reset();
+    }
+    if (userTotal == randoNum) {
+        wins++;
+        $(".wins").text(wins);
+        reset();
+    }
+});
 
-    if(counter === randoNum) {
-        alert("You Win!");
-        resetCounter();
-        resetGoal();
-        }
-    else if (counter >= randoNum){
-     alert("You Lose!");
-     resetCounter()
-     resetGoal();
-        }
+$(".purple").on("click", function(){
+    var crystalValue = ($(this).attr("data-crystalvalue"));
+    crystalValue = parseInt(crystalValue);
+    userTotal += crystalValue;
+    $(".total-score").text(userTotal);
+    console.log("purple " + crystalValue);
+    if (userTotal > randoNum) {
+        losses++;
+        $(".losses").text(losses);
+        console.log("you lost");
+        reset();
+    }
+    if (userTotal == randoNum) {
+        wins++;
+        $(".wins").text(wins);
+        reset();
+    }
+});
+
+$(".blue").on("click", function(){
+    var crystalValue = ($(this).attr("data-crystalvalue"));
+    crystalValue = parseInt(crystalValue);
+    userTotal += crystalValue;
+    $(".total-score").text(userTotal);
+    console.log("blue " + crystalValue);
+    if (userTotal > randoNum) {
+        losses++;
+        $(".losses").text(losses);
+        console.log("you lost");
+        reset();
+    }
+    if (userTotal == randoNum) {
+        wins++;
+        $(".wins").text(wins);
+        reset();
+    }
+});
+
 });
