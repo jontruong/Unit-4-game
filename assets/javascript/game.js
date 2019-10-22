@@ -39,8 +39,7 @@ var value4= Math.floor(Math.random()*10+5);
       blueCrystal.attr("data-crystalvalue", value4);
  };
 
-
-
+// crystal images
 var redCrystal = $("<img>");
 redCrystal.addClass("red");
 redCrystal.attr("src", "assets/images/red stone.jpg");
@@ -66,11 +65,16 @@ blueCrystal.attr("data-crystalvalue", value4);
 $(".crystals").append(blueCrystal);
 ;
 
+
+
+
+//when crystals are clicked they add to the score
 $(".red").on("click", function(){
     var crystalValue = ($(this).attr("data-crystalvalue"));
     crystalValue = parseInt(crystalValue);
     userTotal += crystalValue;
     $(".total-score").text(userTotal);
+   
     console.log("red " + crystalValue);
     if (userTotal > randoNum) {
         losses++;
@@ -128,6 +132,7 @@ $(".blue").on("click", function(){
     crystalValue = parseInt(crystalValue);
     userTotal += crystalValue;
     $(".total-score").text(userTotal);
+
     console.log("blue " + crystalValue);
     if (userTotal > randoNum) {
         losses++;
@@ -141,5 +146,4 @@ $(".blue").on("click", function(){
         reset();
     }
 });
-
-});
+})
